@@ -30,11 +30,18 @@
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{'/about'}}">About</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{'/posts'}}">News</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{'/contact'}}">Contact</a></li>
+                        @guest
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{'/login'}}">Login</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{'/register'}}">Register</a></li>    
+                        @endguest
+                        @auth
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{'/logout'}}">logout</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{route('admin.dashboard')}}">Dashboard</a></li> 
+                        @endauth
                     </ul>
                 </div>
             </div>
         </nav>
-
         @yield('content');
 
                 <!-- Footer-->

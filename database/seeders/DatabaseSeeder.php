@@ -2,12 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\Tag;
 use App\Models\post;
-use App\Models\setting;
 use App\Models\User;
-use Database\Factories\SettingFactory;
+use App\Models\setting;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
+use Database\Factories\SettingFactory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,6 +21,8 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
         Post::factory(100)->create();
         Setting::factory(1)->create();
+        Category::factory(10)->create();
+        Tag::factory(10)->create();
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
