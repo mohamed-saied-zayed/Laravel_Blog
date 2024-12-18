@@ -72,29 +72,6 @@
 
             <!-- Customers Card -->
             <div class="col-xxl-4 col-xl-12">
-
-              <div class="card info-card customers-card">
-                <div class="filter">
-                  <a href="{{route('admin.category')}}" class="btn btn-primary">Show</a>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Categories <span></span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-triangle"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>{{$count_categories}}</h6>
-                      <span class="text-danger small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1"></span>
-
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
             </div><!-- End Customers Card -->
                         <!-- Customers Card -->
                         <div class="col-xxl-4 col-xl-12">

@@ -1,24 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\writer;
 
-use App\Models\post;
+use App\Models\Post;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 
-class PostController extends Controller
+class WriterController extends Controller
 {
     public function index(){
-        $posts = post::with('user')->orderby('id','DESC')->paginate(10);
-        return view('front.posts.index', compact('posts'));
+        Gate::authorize('editor');
+        $posts = Post::with('user')->where('user_id', auth()->id())->orderby('id','DESC')->paginate(10);
+        return view("writer.posts.index",compact("posts"));
     }
-
-    public function show(post $post ){
-        $post->load('comments.user');
-        return view('front.posts.show', compact('post'));
-    }
-
     public function create(){
-        return view('front.posts.create',);
+        return view('writer.posts.create');
     }
     public function store(Request $request){
         $request->validate([
@@ -35,7 +32,7 @@ class PostController extends Controller
         $post->image = $request->image->hashName();
         $post->user_id = auth()->user()->id;
         $post->save();
-        return back()->with('success','Post created successfully');
+        return to_route('writer.dashboard')->with('success', 'post created successfully');
     }
-
 }
+

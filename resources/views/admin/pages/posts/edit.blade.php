@@ -13,7 +13,7 @@
             <div class="card-body">
               <h5 class="card-title">Edit Post</h5>
               <!-- General Form Elements -->
-              <form method="POST" action="{{route('post.update',$post->id)}}">
+              <form method="POST" action="{{route('post.update',$post->id)}}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="row mb-3">
@@ -37,6 +37,15 @@
                     </div>
                     @enderror
                   </div>
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <img src="{{asset('storage/'.$post->image)}}" alt="" width="50%" height="50%">
+                    @error('image')
+                    <div class="alert alert-danger">
+                      {{$message}}
+                    </div>
+                    @enderror
+                    <input type="file" class="form-control" id="image" name="image" >
                 </div>
                 <div class="row mb-3">
                   <label class="col-sm-2 col-form-label">Update Post</label>

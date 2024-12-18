@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class AdminPostController extends Controller
 {
     public function index(){
-        $posts = Post::all();
+        $posts = post::with('user')->orderby('id','DESC')->paginate(10);
         return view("admin.pages.posts.index",compact("posts"));
     }
     public function create(){
@@ -17,11 +17,20 @@ class AdminPostController extends Controller
     }
     public function store(Request $request){
         $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'content' => ['required', 'string', 'max:255']
+            'title' => ['required','string','min:5'],
+            'content' => ['required','string','max:500'],
+            'image' => ['required','image','mimes:png,jpg,jpeg,gif,webp']
         ]);
-        Post::create($request->all());
-        return redirect()->route('admin.post')->with('success', 'Post created successfully.');
+        if($request->hasfile('image')){
+            $request->file('image')->store('public');
+        }
+        $post = new post();
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->image = $request->image->hashName();
+        $post->user_id = auth()->user()->id;
+        $post->save();
+        return redirect()->route('admin.post')->with('success', 'Post Added successfully.');
     }
     public function delete(post $post){
          $post->delete();
@@ -31,6 +40,10 @@ class AdminPostController extends Controller
         $post = Post::findorfail($id);
         $post->title = $request->title;
         $post->content = $request->content;
+        if($request->hasfile('image')){
+            $request->file('image')->store('public');
+            $post->image = $request->image->hashName();
+        }
         $post->save();
         return redirect()->route('admin.post')->with('success', 'Post Updated successfully.');
     }

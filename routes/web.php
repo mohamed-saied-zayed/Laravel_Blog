@@ -3,13 +3,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\admin\AdminTagController;
-use App\Http\Controllers\admin\AdminPostController;
-use App\Http\Controllers\admin\AdminUserController;
-use App\Http\Controllers\admin\AdminMessageController;
-use App\Http\Controllers\admin\AdminSettingController;
-use App\Http\Controllers\admin\AdminCategoryController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\writer\WriterController;
 use App\Http\Controllers\{PostController,SiteController,AboutController,ContactController};
+use App\Http\Controllers\admin\{AdminCategoryController,AdminSettingController,AdminMessageController,AdminUserController,AdminPostController,AdminTagController};
 
 
 
@@ -18,7 +15,11 @@ Route::get('/about',[AboutController::class,'index']);
 Route::get('/contact',[ContactController::class,'index']);
 Route::post('/send-message',[ContactController::class,'sendMessage']);
 Route::get('/posts',[PostController::class,'index']);
+Route::get('/posts/create',[PostController::class,'create'])->name('posts.create');
+Route::post('/posts',[PostController::class,'store'])->name('posts.store');
 Route::get('/posts/{post}',[PostController::class,'show']);
+Route::post('/comments/{comment}',[CommentController::class,'destroy'])->name('comment.destroy');
+Route::post('/posts/{post}/comment',[CommentController::class,'store'])->name('store.comment');
 
 
 //authentication routes
@@ -36,20 +37,24 @@ Route::post('/login',[AuthController::class,'loginUser'])->name('login.user');
 //admin routes
 Route::get('/admin-home',[AdminController::class,'index'])->name('admin.dashboard');
 
+//writer routes
+Route::get('/writer-home',[WriterController::class,'index'])->name('writer.dashboard');
+Route::get('/posts/create',[WriterController::class,'create'])->name('writer.posts.create');
+Route::post('/post',[WriterController::class,'store'])->name('posts.store.writer');
+
 //admin category routes
 Route::get('/admin-category',[AdminCategoryController::class,'index'])->name('admin.category');
 Route::get('/category-create',[AdminCategoryController::class,'create'])->name('category.create');
-Route::post('/category-store',[AdminCategoryController::class,'store'])->name('category.store');
+Route::post('/category',[AdminCategoryController::class,'store'])->name('category.store');
 Route::get('/category-edit/{id}/edit',[AdminCategoryController::class,'edit'])->name('category.edit');
 Route::put('/category-update/{id}',[AdminCategoryController::class,'update'])->name('category.update');
-Route::delete('/category-delete/{category}',[AdminCategoryController::class,'delete'])->name('category.delete');
-// Route::match(['post','put'], '/category-edit/{id}/edit', [AdminCategoryController::class, 'edit'])->name('category.edit');
+Route::delete('/category/{category}',[AdminCategoryController::class,'destroy'])->name('category.destroy');
 
 
 //admin posts routes
 Route::get('/admin-post',[AdminPostController::class,'index'])->name('admin.post');
 Route::get('/post-create',[AdminPostController::class,'create'])->name('post.create');
-Route::post('/post-store',[AdminPostController::class,'store'])->name('post.store');
+Route::post('/posts',[AdminPostController::class,'store'])->name('post.store');
 Route::get('/post-edit/{id}/edit',[AdminPostController::class,'edit'])->name('post.edit');
 Route::put('/post-update/{id}',[AdminPostController::class,'update'])->name('post.update');
 Route::delete('/post-delete/{post}',[AdminPostController::class,'delete'])->name('post.delete');
@@ -84,8 +89,8 @@ Route::delete('/tag-delete/{tag}',[AdminTagController::class,'delete'])->name('t
 
 
 //admin setting routes
-Route::put('/setting-update/{id}',[AdminSettingController::class,'update'])->name('setting.update');
-Route::get('/setting-edit/{id}/edit',[AdminSettingController::class,'edit'])->name('setting.edit');
+Route::put('/settings/{setting}',[AdminSettingController::class,'update'])->name('settings.update');
+Route::get('/settings/{id}/edit',[AdminSettingController::class,'edit'])->name('settings.edit');
 
 
 

@@ -13,7 +13,7 @@
             <div class="card-body">
               <h5 class="card-title">Edit Setting</h5>
               <!-- General Form Elements -->
-              <form method="POST" {{route('setting.update',$setting->id)}}>
+              <form action="{{route('settings.update',$setting->id)}}" method="POST" >
                 @csrf
                 @method('PUT')
                 <div class="row mb-3">

@@ -30,7 +30,7 @@
                                             <td>{{ $setting->youtube_link }}</td>
                                             <td>{{ $setting->github_link }}</td>
                                             <td>
-                                                <form action="{{ route('setting.edit', $setting->id) }}" method="GET"
+                                                <form action="{{ route('settings.edit', $setting->id) }}" method="GET"
                                                     class="d-inline">
                                                     @csrf
                                                     <button type="submit" class="btn btn-warning">edit</button>
@@ -77,7 +77,7 @@
                                             <td>{{ $setting->about_title }}</td>
                                             <td>{{ $setting->about_content }}</td>
                                             <td>
-                                                <form action="{{ route('setting.edit', $setting->id) }}" method="GET"
+                                                <form action="{{ route('settings.edit', $setting->id) }}" method="GET"
                                                     class="d-inline">
                                                     @csrf
                                                     <button type="submit" class="btn btn-warning">edit</button>

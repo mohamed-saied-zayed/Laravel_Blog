@@ -1,10 +1,8 @@
-@extends('admin.layouts.master')
+@extends('writer.layouts.master')
 @section('admin.content')
-
 <main id="main" class="main">
-
     <div class="pagetitle">
-      <h1>Form Elements</h1>
+      <h1>Add Post</h1>
     </div><!-- End Page Title -->
     <section class="section">
       <div class="row">
@@ -13,7 +11,7 @@
             <div class="card-body">
               <h5 class="card-title">Add Post</h5>
               <!-- General Form Elements -->
-              <form action="{{route('post.store')}}" method="POST" enctype="multipart/form-data" novalidate>
+              <form action="{{route('posts.store.writer')}}" method="POST" enctype="multipart/form-data" novalidate>
                 @csrf
                 <div class="form-group">
                     <label for="title">Title</label>

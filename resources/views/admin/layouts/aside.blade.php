@@ -9,12 +9,6 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link " href="{{route('admin.category')}}">
-          <i class="bi bi-grid"></i>
-          <span>Categories</span>
-        </a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link " href="{{route('admin.post')}}">
           <i class="bi bi-grid"></i>
           <span>Posts</span>

@@ -12,13 +12,12 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function index(){
-        $count_categories= Category::count();
         $count_posts = Post::count();
         $count_comments = Comment::count();
         $count_replies = Reply::count();
         $count_tags = Tag::count();
         $count_users = User::count();
         $count_messages = Message::count();
-        return view("admin.pages.home.index",compact("count_categories", "count_posts", "count_comments", "count_replies", "count_tags", "count_users", "count_messages"));
+        return view("admin.pages.home.index",compact("count_posts", "count_comments", "count_replies", "count_tags", "count_users", "count_messages"));
     }
 }
