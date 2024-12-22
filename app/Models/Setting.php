@@ -20,4 +20,9 @@ class Setting extends Model
         'about_titile',
         'about_content'
     ];
+    protected $hidden = [
+        'id',
+        'created_at',
+        'updated_at'
+    ];
 }

@@ -37,6 +37,7 @@ class AdminPostController extends Controller
          return to_route('admin.post')->with('success', 'post deleted successfully.');
     }
     public function update($id,Request $request){
+        dd($id,$request);
         $post = Post::findorfail($id);
         $post->title = $request->title;
         $post->content = $request->content;
